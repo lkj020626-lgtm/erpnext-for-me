@@ -55,24 +55,22 @@ starmake.add_quick_actions = function () {
   if (document.querySelector(".starmake-quick-actions")) return;
 
   const actions = [
-    { label: "新建销售订单", route: "/app/sales-order/new", icon: "sale" },
-    { label: "新建采购订单", route: "/app/purchase-order/new", icon: "buying" },
-    { label: "库存查询", route: "/app/query-report/Current Stock Report", icon: "stock" },
-    { label: "新建商品", route: "/app/item/new", icon: "item" },
-    { label: "低库存预警", route: "/app/query-report/Low Stock Warning", icon: "warning" },
-    { label: "销售报表", route: "/app/query-report/Sales Summary", icon: "report" },
+    { label: "新建销售订单", route: "/app/sales-order/new", icon: "📋" },
+    { label: "新建采购订单", route: "/app/purchase-order/new", icon: "🛒" },
+    { label: "库存查询", route: "/app/query-report/Current Stock Report", icon: "📦" },
+    { label: "新建商品", route: "/app/item/new", icon: "🏷️" },
+    { label: "低库存预警", route: "/app/query-report/Low Stock Warning", icon: "⚠️" },
+    { label: "销售报表", route: "/app/query-report/Sales Summary", icon: "📊" },
   ];
 
-  let html = `<div class="starmake-quick-actions" style="
-    padding: 15px; margin: 10px 0; background: #f8f9fa; border-radius: 8px;
-  ">
-    <h5 style="margin-bottom: 12px; color: #333; font-weight: 600;">常用操作</h5>
-    <div style="display: flex; flex-wrap: wrap; gap: 10px;">`;
+  let html = `<div class="starmake-quick-actions sm-animate">
+    <h5><span class="starmake-gradient-text">常用操作</span></h5>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1;">`;
 
-  actions.forEach((a) => {
-    html += `<a href="${a.route}" class="btn btn-default btn-sm" style="
-      padding: 8px 16px; border-radius: 6px; font-size: 13px;
-    ">${a.label}</a>`;
+  actions.forEach((a, i) => {
+    html += `<a href="${a.route}" class="btn btn-default btn-sm sm-animate" style="
+      animation-delay: ${i * 0.08}s;
+    ">${a.icon} ${a.label}</a>`;
   });
 
   html += `</div></div>`;
@@ -81,8 +79,9 @@ starmake.add_quick_actions = function () {
     const container = document.querySelector(".layout-main-section");
     if (container && !document.querySelector(".starmake-quick-actions")) {
       container.insertAdjacentHTML("afterbegin", html);
+      starmake.init_scroll_animations();
     }
-  }, 1000);
+  }, 800);
 };
 
 // ============================================================
@@ -206,3 +205,52 @@ frappe.listview_settings["Supplier"].onload = function (listview) {
   if (_supplier_list_onload) _supplier_list_onload(listview);
   starmake.add_import_buttons(listview, "Supplier");
 };
+
+// ============================================================
+// Scroll Animations (IntersectionObserver)
+// ============================================================
+starmake.init_scroll_animations = function () {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("sm-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document
+    .querySelectorAll(".sm-animate, .sm-animate-left, .sm-animate-scale")
+    .forEach((el) => observer.observe(el));
+};
+
+// Run on every page change
+$(document).on("page-change", function () {
+  setTimeout(starmake.init_scroll_animations, 500);
+});
+
+// ============================================================
+// Click Spark Effect (subtle particle burst on button clicks)
+// ============================================================
+$(document).on("click", ".btn-primary, .btn-primary-dark", function (e) {
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  for (let i = 0; i < 6; i++) {
+    const spark = document.createElement("span");
+    spark.className = "sm-spark";
+    spark.style.left = x + "px";
+    spark.style.top = y + "px";
+    spark.style.setProperty("--angle", Math.random() * 360 + "deg");
+    spark.style.setProperty("--distance", 20 + Math.random() * 30 + "px");
+    btn.style.position = "relative";
+    btn.style.overflow = "hidden";
+    btn.appendChild(spark);
+    setTimeout(() => spark.remove(), 600);
+  }
+});

@@ -20,7 +20,7 @@ if ("serviceWorker" in navigator) {
   }
   const meta = document.createElement("meta");
   meta.name = "theme-color";
-  meta.content = "#2196F3";
+  meta.content = "#1A6DDB";
   document.head.appendChild(meta);
 })();
 
@@ -64,13 +64,11 @@ starmake.add_quick_actions = function () {
   ];
 
   let html = `<div class="starmake-quick-actions sm-animate">
-    <h5><span class="starmake-gradient-text">常用操作</span></h5>
-    <div style="display: flex; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1;">`;
+    <h5>常用操作</h5>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px;">`;
 
-  actions.forEach((a, i) => {
-    html += `<a href="${a.route}" class="btn btn-default btn-sm sm-animate" style="
-      animation-delay: ${i * 0.08}s;
-    ">${a.icon} ${a.label}</a>`;
+  actions.forEach((a) => {
+    html += `<a href="${a.route}" class="btn btn-default btn-sm">${a.icon} ${a.label}</a>`;
   });
 
   html += `</div></div>`;
@@ -230,27 +228,4 @@ starmake.init_scroll_animations = function () {
 // Run on every page change
 $(document).on("page-change", function () {
   setTimeout(starmake.init_scroll_animations, 500);
-});
-
-// ============================================================
-// Click Spark Effect (subtle particle burst on button clicks)
-// ============================================================
-$(document).on("click", ".btn-primary, .btn-primary-dark", function (e) {
-  const btn = e.currentTarget;
-  const rect = btn.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  for (let i = 0; i < 6; i++) {
-    const spark = document.createElement("span");
-    spark.className = "sm-spark";
-    spark.style.left = x + "px";
-    spark.style.top = y + "px";
-    spark.style.setProperty("--angle", Math.random() * 360 + "deg");
-    spark.style.setProperty("--distance", 20 + Math.random() * 30 + "px");
-    btn.style.position = "relative";
-    btn.style.overflow = "hidden";
-    btn.appendChild(spark);
-    setTimeout(() => spark.remove(), 600);
-  }
 });

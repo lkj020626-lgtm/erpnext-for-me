@@ -1,8 +1,90 @@
 // StarMake - Lightweight ERP Extensions
-// Adds import/export buttons to Item, Customer, Supplier list views
+// UI simplification + Chinese defaults + import/export buttons
 
 frappe.provide("starmake");
 
+// ============================================================
+// 新手友好：简化桌面快捷入口
+// ============================================================
+$(document).on("app_ready", function () {
+  // 强制设置语言为中文（如果还没设置）
+  if (frappe.boot && frappe.boot.lang !== "zh") {
+    frappe.call({
+      method: "frappe.client.set_value",
+      args: {
+        doctype: "User",
+        name: frappe.session.user,
+        fieldname: "language",
+        value: "zh",
+      },
+      async: true,
+    });
+  }
+
+  // 在桌面添加快捷操作卡片
+  if (
+    frappe.get_route_str() === "" ||
+    frappe.get_route_str() === "Workspaces"
+  ) {
+    starmake.add_quick_actions();
+  }
+});
+
+starmake.add_quick_actions = function () {
+  if (document.querySelector(".starmake-quick-actions")) return;
+
+  const actions = [
+    { label: "新建销售订单", route: "/app/sales-order/new", icon: "sale" },
+    { label: "新建采购订单", route: "/app/purchase-order/new", icon: "buying" },
+    { label: "库存查询", route: "/app/query-report/Current Stock Report", icon: "stock" },
+    { label: "新建商品", route: "/app/item/new", icon: "item" },
+    { label: "低库存预警", route: "/app/query-report/Low Stock Warning", icon: "warning" },
+    { label: "销售报表", route: "/app/query-report/Sales Summary", icon: "report" },
+  ];
+
+  let html = `<div class="starmake-quick-actions" style="
+    padding: 15px; margin: 10px 0; background: #f8f9fa; border-radius: 8px;
+  ">
+    <h5 style="margin-bottom: 12px; color: #333; font-weight: 600;">常用操作</h5>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px;">`;
+
+  actions.forEach((a) => {
+    html += `<a href="${a.route}" class="btn btn-default btn-sm" style="
+      padding: 8px 16px; border-radius: 6px; font-size: 13px;
+    ">${a.label}</a>`;
+  });
+
+  html += `</div></div>`;
+
+  setTimeout(() => {
+    const container = document.querySelector(".layout-main-section");
+    if (container && !document.querySelector(".starmake-quick-actions")) {
+      container.insertAdjacentHTML("afterbegin", html);
+    }
+  }, 1000);
+};
+
+// ============================================================
+// 简化侧边栏：隐藏小工厂不需要的模块
+// ============================================================
+$(document).on("app_ready", function () {
+  const hide_modules = ["Quality Management", "EDI", "Subcontracting"];
+
+  setTimeout(() => {
+    hide_modules.forEach((mod) => {
+      document
+        .querySelectorAll(`[data-module="${mod}"], [data-module-name="${mod}"]`)
+        .forEach((el) => {
+          const parent = el.closest("li") || el.closest(".module-link");
+          if (parent) parent.style.display = "none";
+        });
+    });
+  }, 2000);
+});
+
+// ============================================================
+// Excel 导入导出按钮
+// ============================================================
 starmake.add_import_buttons = function (listview, doctype) {
   listview.page.add_inner_button(__("下载导入模板"), function () {
     window.open(
@@ -56,7 +138,11 @@ starmake.show_import_dialog = function (doctype) {
               });
               msg += "</ul>";
             }
-            frappe.msgprint({ title: __("导入结果"), message: msg, indicator: "blue" });
+            frappe.msgprint({
+              title: __("导入结果"),
+              message: msg,
+              indicator: "blue",
+            });
             cur_list.refresh();
           }
         },
@@ -66,14 +152,9 @@ starmake.show_import_dialog = function (doctype) {
   d.show();
 };
 
-// Hook into list views
-$(document).on("app_ready", function () {
-  if (frappe.route_hooks) {
-    frappe.route_hooks.after_load = frappe.route_hooks.after_load || [];
-  }
-});
-
-// Extend Item List
+// ============================================================
+// 列表页扩展
+// ============================================================
 const _item_list_onload = frappe.listview_settings["Item"]
   ? frappe.listview_settings["Item"].onload
   : null;
@@ -84,7 +165,6 @@ frappe.listview_settings["Item"].onload = function (listview) {
   starmake.add_import_buttons(listview, "Item");
 };
 
-// Extend Customer List
 const _customer_list_onload = frappe.listview_settings["Customer"]
   ? frappe.listview_settings["Customer"].onload
   : null;
@@ -95,12 +175,12 @@ frappe.listview_settings["Customer"].onload = function (listview) {
   starmake.add_import_buttons(listview, "Customer");
 };
 
-// Extend Supplier List
 const _supplier_list_onload = frappe.listview_settings["Supplier"]
   ? frappe.listview_settings["Supplier"].onload
   : null;
 
-frappe.listview_settings["Supplier"] = frappe.listview_settings["Supplier"] || {};
+frappe.listview_settings["Supplier"] =
+  frappe.listview_settings["Supplier"] || {};
 frappe.listview_settings["Supplier"].onload = function (listview) {
   if (_supplier_list_onload) _supplier_list_onload(listview);
   starmake.add_import_buttons(listview, "Supplier");

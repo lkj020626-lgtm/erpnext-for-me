@@ -1,0 +1,68 @@
+/* StarMake UI Simplification */
+
+/* 简化顶部导航栏 - 更清爽 */
+.navbar {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* 快捷操作卡片样式 */
+.starmake-quick-actions {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+  border: 1px solid #dee2e6;
+}
+
+.starmake-quick-actions .btn {
+  transition: all 0.2s ease;
+  border: 1px solid #dee2e6;
+  background: #fff;
+}
+
+.starmake-quick-actions .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: #2490ef;
+  color: #2490ef;
+}
+
+/* 表单页面 - 增大字体让老板看得清 */
+.frappe-control .control-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.frappe-control .control-input input,
+.frappe-control .control-input select,
+.frappe-control .control-input textarea {
+  font-size: 14px;
+}
+
+/* 列表页 - 行高增大，更易点击 */
+.list-row {
+  min-height: 42px;
+}
+
+.list-row .list-row-col {
+  font-size: 13px;
+}
+
+/* 打印预览优化 */
+@media print {
+  .page-head,
+  .navbar,
+  .sidebar,
+  .page-container > .page-sidebar {
+    display: none !important;
+  }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .starmake-quick-actions {
+    padding: 10px !important;
+  }
+
+  .starmake-quick-actions .btn {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+  }
+}

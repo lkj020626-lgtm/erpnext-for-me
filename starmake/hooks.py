@@ -10,7 +10,7 @@ app_color = "#2196F3"
 develop_version = "0.x.x-develop"
 
 app_include_js = ["/assets/starmake/js/starmake.js"]
-app_include_css = []
+app_include_css = ["/assets/starmake/css/starmake.css"]
 
 # Fixtures - export Custom Fields, Property Setters, Client Scripts etc.
 fixtures = [

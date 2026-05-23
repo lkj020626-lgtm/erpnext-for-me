@@ -8,12 +8,19 @@ def after_install():
     import_fixtures()
     import_print_formats()
     _setup_roles()
+    _setup_chinese()
 
 
 def after_migrate():
     import_fixtures()
     import_print_formats()
     _setup_roles()
+
+
+def _setup_chinese():
+    from starmake.setup_wizard import setup_chinese_defaults, setup_simplified_desktop
+    setup_chinese_defaults()
+    setup_simplified_desktop()
 
 
 def _setup_roles():

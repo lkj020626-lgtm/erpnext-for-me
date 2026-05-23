@@ -1,7 +1,28 @@
 // StarMake - Lightweight ERP Extensions
-// UI simplification + Chinese defaults + import/export buttons
+// UI simplification + Chinese defaults + PWA + import/export buttons
 
 frappe.provide("starmake");
+
+// ============================================================
+// PWA: 注册 Service Worker + Manifest
+// ============================================================
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/assets/starmake/pwa/sw.js")
+    .catch(() => {});
+}
+(function () {
+  if (!document.querySelector('link[rel="manifest"]')) {
+    const link = document.createElement("link");
+    link.rel = "manifest";
+    link.href = "/assets/starmake/pwa/manifest.json";
+    document.head.appendChild(link);
+  }
+  const meta = document.createElement("meta");
+  meta.name = "theme-color";
+  meta.content = "#2196F3";
+  document.head.appendChild(meta);
+})();
 
 // ============================================================
 // 新手友好：简化桌面快捷入口

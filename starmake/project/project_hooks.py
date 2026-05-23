@@ -8,7 +8,6 @@ StarMake Project / Asset / HR Module
 import frappe
 
 
-
 @frappe.whitelist()
 def get_project_dashboard():
     """Get project status overview."""

@@ -1,52 +1,35 @@
 # ============================================================
-# StarMake ERP - 完整自包含 Docker 镜像
-# 包含 Frappe + ERPNext + StarMake，无需外部网络拉取源码
+# StarMake ERP Docker Image
+# 基于官方 frappe/erpnext 镜像，叠加 StarMake 自定义应用
+# 用于 CI 自动构建和服务器部署
+# ============================================================
+# 如需完全离线构建（不拉取任何外部镜像），请使用
+# deployment/offline/pack-offline-bundle.sh 打包方案
 # ============================================================
 
-FROM python:3.11-slim-bookworm AS base
+FROM frappe/erpnext:v15
 
-# System dependencies
+USER root
+
+# Install Chinese fonts for PDF/print
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git curl wget \
-    nodejs npm \
-    mariadb-client \
-    redis-tools \
-    xvfb libfontconfig wkhtmltopdf \
-    fonts-wqy-zenhei fonts-wqy-microhei fonts-noto-cjk \
-    build-essential python3-dev \
-    libmariadb-dev libssl-dev \
-    && rm -rf /var/lib/apt/lists/* \
-    && npm install -g yarn
+    fonts-wqy-zenhei \
+    fonts-wqy-microhei \
+    fonts-noto-cjk \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create frappe user
-RUN useradd -ms /bin/bash frappe
+# Copy StarMake app
+COPY ./starmake /home/frappe/frappe-bench/apps/starmake
+RUN chown -R frappe:frappe /home/frappe/frappe-bench/apps/starmake
+
 USER frappe
-WORKDIR /home/frappe
-
-# Install bench
-RUN pip install --user frappe-bench
-
-ENV PATH="/home/frappe/.local/bin:${PATH}"
-
-# Initialize bench using local Frappe source
-COPY --chown=frappe:frappe ./frappe /home/frappe/frappe-src
-RUN bench init frappe-bench --skip-redis-config-generation \
-    --frappe-path /home/frappe/frappe-src --skip-assets \
-    && rm -rf /home/frappe/frappe-src
-
 WORKDIR /home/frappe/frappe-bench
 
-# Install ERPNext from local source
-COPY --chown=frappe:frappe ./erpnext /home/frappe/frappe-bench/apps/erpnext
-RUN bench get-app /home/frappe/frappe-bench/apps/erpnext --skip-assets || \
-    pip install -e apps/erpnext
+# Install StarMake Python dependencies
+RUN pip install -e apps/starmake --quiet 2>/dev/null || true
 
-# Install StarMake from local source
-COPY --chown=frappe:frappe ./starmake /home/frappe/frappe-bench/apps/starmake
-RUN pip install -e apps/starmake 2>/dev/null || true
-
-# Build all frontend assets
-RUN bench build || true
+# Build StarMake frontend assets
+RUN bench build --app starmake 2>/dev/null || true
 
 EXPOSE 8000 9000
 VOLUME ["/home/frappe/frappe-bench/sites"]

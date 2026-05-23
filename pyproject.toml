@@ -1,0 +1,19 @@
+[project]
+name = "starmake"
+version = "0.1.0"
+description = "StarMake - Lightweight ERP for small manufacturers"
+authors = [
+    { name = "StarMake", email = "dev@starmake.local" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "frappe",
+    "erpnext",
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "starmake"

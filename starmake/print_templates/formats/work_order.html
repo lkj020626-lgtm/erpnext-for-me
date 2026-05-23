@@ -1,0 +1,68 @@
+<style>
+  .print-format { font-family: "Microsoft YaHei", "SimSun", sans-serif; font-size: 12px; }
+  .print-format h2 { text-align: center; margin-bottom: 5px; }
+  .print-format .doc-info td { padding: 2px 8px; }
+  .print-format table.items { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .print-format table.items th, .print-format table.items td { border: 1px solid #333; padding: 4px 6px; text-align: center; }
+  .print-format table.items th { background: #f0f0f0; }
+  .print-format .status-box { display: inline-block; padding: 2px 8px; border: 1px solid #333; margin-left: 10px; }
+  .print-format .signatures { margin-top: 40px; display: flex; justify-content: space-between; }
+  .print-format .signatures span { display: inline-block; width: 120px; border-bottom: 1px solid #333; }
+</style>
+
+<div class="print-format">
+  <h2>生产工单</h2>
+  <table class="doc-info">
+    <tr>
+      <td><b>工单号：</b>{{ doc.name }}</td>
+      <td><b>状态：</b><span class="status-box">{{ doc.status }}</span></td>
+      <td><b>日期：</b>{{ doc.planned_start_date or doc.creation.split(' ')[0] }}</td>
+    </tr>
+    <tr>
+      <td><b>成品：</b>{{ doc.production_item }} - {{ doc.item_name }}</td>
+      <td><b>计划数量：</b>{{ doc.qty }} {{ doc.stock_uom }}</td>
+      <td><b>已完成：</b>{{ doc.produced_qty }} {{ doc.stock_uom }}</td>
+    </tr>
+    <tr>
+      <td><b>BOM：</b>{{ doc.bom_no }}</td>
+      <td><b>目标仓库：</b>{{ doc.fg_warehouse }}</td>
+      <td><b>领料仓库：</b>{{ doc.source_warehouse or doc.wip_warehouse }}</td>
+    </tr>
+  </table>
+
+  <h3 style="margin-top: 15px;">所需原材料</h3>
+  <table class="items">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>物料编码</th>
+        <th>物料名称</th>
+        <th>需求数量</th>
+        <th>已领数量</th>
+        <th>待领数量</th>
+        <th>单位</th>
+        <th>领料仓库</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in doc.required_items %}
+      <tr>
+        <td>{{ item.idx }}</td>
+        <td>{{ item.item_code }}</td>
+        <td>{{ item.item_name }}</td>
+        <td>{{ item.required_qty }}</td>
+        <td>{{ item.transferred_qty }}</td>
+        <td>{{ item.required_qty - item.transferred_qty }}</td>
+        <td>{{ item.stock_uom }}</td>
+        <td>{{ item.source_warehouse or '' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="signatures">
+    <div>下单人：<span></span></div>
+    <div>生产主管：<span></span></div>
+    <div>仓管员：<span></span></div>
+  </div>
+</div>

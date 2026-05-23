@@ -1,0 +1,92 @@
+[
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Item",
+    "module": "Master Data",
+    "field_name": "quality_inspection_template",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Item",
+    "module": "Master Data",
+    "field_name": "is_fixed_asset",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Item",
+    "module": "Master Data",
+    "field_name": "asset_category",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Item",
+    "module": "Master Data",
+    "field_name": "asset_naming_series",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Item",
+    "module": "Master Data",
+    "field_name": "allow_alternative_item",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Item",
+    "module": "Master Data",
+    "field_name": "is_customer_provided_item",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Customer",
+    "module": "Master Data",
+    "field_name": "loyalty_program",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Customer",
+    "module": "Master Data",
+    "field_name": "sales_team",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Warehouse",
+    "module": "Master Data",
+    "field_name": "disabled",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "0",
+    "doctype_or_field": "DocField"
+  }
+]

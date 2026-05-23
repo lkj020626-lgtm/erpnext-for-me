@@ -1,0 +1,70 @@
+<style>
+  .print-format { font-family: "Microsoft YaHei", "SimSun", sans-serif; font-size: 12px; }
+  .print-format h2 { text-align: center; margin-bottom: 5px; }
+  .print-format .doc-info td { padding: 2px 8px; }
+  .print-format table.items { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .print-format table.items th, .print-format table.items td { border: 1px solid #333; padding: 4px 6px; text-align: center; }
+  .print-format table.items th { background: #f0f0f0; }
+  .print-format .signatures { margin-top: 40px; display: flex; justify-content: space-between; }
+  .print-format .signatures span { display: inline-block; width: 120px; border-bottom: 1px solid #333; }
+</style>
+
+<div class="print-format">
+  <h2>销售出库单</h2>
+  <table class="doc-info">
+    <tr>
+      <td><b>单号：</b>{{ doc.name }}</td>
+      <td><b>出库日期：</b>{{ doc.posting_date }}</td>
+      <td><b>客户：</b>{{ doc.customer_name }}</td>
+    </tr>
+    <tr>
+      <td><b>关联销售订单：</b>{{ doc.items[0].against_sales_order if doc.items else '' }}</td>
+      <td><b>出库仓库：</b>{{ doc.set_warehouse or '' }}</td>
+      <td><b>联系电话：</b>{{ doc.contact_mobile or '' }}</td>
+    </tr>
+  </table>
+
+  <table class="items">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>商品编码</th>
+        <th>商品名称</th>
+        <th>规格型号</th>
+        <th>出库数量</th>
+        <th>单位</th>
+        <th>单价</th>
+        <th>金额</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in doc.items %}
+      <tr>
+        <td>{{ item.idx }}</td>
+        <td>{{ item.item_code }}</td>
+        <td>{{ item.item_name }}</td>
+        <td>{{ frappe.db.get_value("Item", item.item_code, "custom_specification") or '' }}</td>
+        <td>{{ item.qty }}</td>
+        <td>{{ item.uom }}</td>
+        <td>{{ item.rate }}</td>
+        <td>{{ item.amount }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4"><b>合计</b></td>
+        <td><b>{{ doc.total_qty }}</b></td>
+        <td></td>
+        <td></td>
+        <td><b>{{ doc.grand_total }}</b></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="signatures">
+    <div>出库人：<span></span></div>
+    <div>仓管员：<span></span></div>
+    <div>客户签收：<span></span></div>
+  </div>
+</div>

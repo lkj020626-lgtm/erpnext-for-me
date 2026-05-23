@@ -1,0 +1,79 @@
+[
+  {
+    "doctype": "Print Format",
+    "name": "StarMake Purchase Order",
+    "doc_type": "Purchase Order",
+    "module": "Master Data",
+    "print_format_type": "Jinja",
+    "standard": "No",
+    "custom_format": 1,
+    "default_print_language": "zh",
+    "html": ""
+  },
+  {
+    "doctype": "Print Format",
+    "name": "StarMake Purchase Receipt",
+    "doc_type": "Purchase Receipt",
+    "module": "Master Data",
+    "print_format_type": "Jinja",
+    "standard": "No",
+    "custom_format": 1,
+    "default_print_language": "zh",
+    "html": ""
+  },
+  {
+    "doctype": "Print Format",
+    "name": "StarMake Sales Order",
+    "doc_type": "Sales Order",
+    "module": "Master Data",
+    "print_format_type": "Jinja",
+    "standard": "No",
+    "custom_format": 1,
+    "default_print_language": "zh",
+    "html": ""
+  },
+  {
+    "doctype": "Print Format",
+    "name": "StarMake Delivery Note",
+    "doc_type": "Delivery Note",
+    "module": "Master Data",
+    "print_format_type": "Jinja",
+    "standard": "No",
+    "custom_format": 1,
+    "default_print_language": "zh",
+    "html": ""
+  },
+  {
+    "doctype": "Print Format",
+    "name": "StarMake Work Order",
+    "doc_type": "Work Order",
+    "module": "Master Data",
+    "print_format_type": "Jinja",
+    "standard": "No",
+    "custom_format": 1,
+    "default_print_language": "zh",
+    "html": ""
+  },
+  {
+    "doctype": "Print Format",
+    "name": "StarMake Stock Entry",
+    "doc_type": "Stock Entry",
+    "module": "Master Data",
+    "print_format_type": "Jinja",
+    "standard": "No",
+    "custom_format": 1,
+    "default_print_language": "zh",
+    "html": ""
+  },
+  {
+    "doctype": "Print Format",
+    "name": "StarMake Item Label",
+    "doc_type": "Delivery Note",
+    "module": "Master Data",
+    "print_format_type": "Jinja",
+    "standard": "No",
+    "custom_format": 1,
+    "default_print_language": "zh",
+    "html": ""
+  }
+]

@@ -1,0 +1,21 @@
+<style>
+  .label-format { font-family: "Microsoft YaHei", sans-serif; font-size: 10px; }
+  .label-format .label-item { border: 1px solid #333; padding: 8px; margin: 4px; display: inline-block; width: 60mm; height: 40mm; vertical-align: top; page-break-inside: avoid; }
+  .label-format .item-name { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+  .label-format .item-spec { font-size: 11px; color: #555; margin-bottom: 4px; }
+  .label-format .barcode-area { text-align: center; margin: 6px 0; }
+  .label-format .item-code { font-size: 10px; text-align: center; }
+</style>
+
+<div class="label-format">
+  {% for item in doc.items %}
+  <div class="label-item">
+    <div class="item-name">{{ item.item_name }}</div>
+    <div class="item-spec">{{ frappe.db.get_value("Item", item.item_code, "custom_specification") or '' }}</div>
+    <div class="barcode-area">
+      <img src="data:image/png;base64,{{ frappe.utils.get_barcode(item.item_code, 'Code128') if frappe.utils.get_barcode else '' }}" style="max-width: 50mm; height: 15mm;" />
+    </div>
+    <div class="item-code">{{ item.item_code }}</div>
+  </div>
+  {% endfor %}
+</div>

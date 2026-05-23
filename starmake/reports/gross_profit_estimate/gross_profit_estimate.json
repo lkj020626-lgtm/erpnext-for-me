@@ -1,0 +1,34 @@
+{
+  "name": "Gross Profit Estimate",
+  "doctype": "Report",
+  "ref_doctype": "Delivery Note",
+  "report_type": "Script Report",
+  "module": "Selling",
+  "is_standard": "Yes",
+  "filters": [
+    {
+      "fieldname": "from_date",
+      "label": "开始日期",
+      "fieldtype": "Date",
+      "default": "frappe.datetime.month_start()"
+    },
+    {
+      "fieldname": "to_date",
+      "label": "结束日期",
+      "fieldtype": "Date",
+      "default": "frappe.datetime.now_date()"
+    },
+    {
+      "fieldname": "customer",
+      "label": "客户",
+      "fieldtype": "Link",
+      "options": "Customer"
+    },
+    {
+      "fieldname": "item_code",
+      "label": "商品",
+      "fieldtype": "Link",
+      "options": "Item"
+    }
+  ]
+}

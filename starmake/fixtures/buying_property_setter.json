@@ -1,0 +1,72 @@
+[
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Purchase Order",
+    "module": "Master Data",
+    "field_name": "tax_category",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Purchase Order",
+    "module": "Master Data",
+    "field_name": "shipping_rule",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Purchase Order",
+    "module": "Master Data",
+    "field_name": "payment_schedule",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Purchase Order",
+    "module": "Master Data",
+    "field_name": "taxes",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Purchase Receipt",
+    "module": "Master Data",
+    "field_name": "taxes",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Purchase Receipt",
+    "module": "Master Data",
+    "field_name": "tax_category",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  },
+  {
+    "doctype": "Property Setter",
+    "doc_type": "Purchase Receipt",
+    "module": "Master Data",
+    "field_name": "shipping_rule",
+    "property": "hidden",
+    "property_type": "Check",
+    "value": "1",
+    "doctype_or_field": "DocField"
+  }
+]

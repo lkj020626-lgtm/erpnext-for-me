@@ -1,0 +1,22 @@
+{
+  "name": "Low Stock Warning",
+  "doctype": "Report",
+  "ref_doctype": "Bin",
+  "report_type": "Script Report",
+  "module": "Stock",
+  "is_standard": "Yes",
+  "filters": [
+    {
+      "fieldname": "warehouse",
+      "label": "仓库",
+      "fieldtype": "Link",
+      "options": "Warehouse"
+    },
+    {
+      "fieldname": "item_group",
+      "label": "商品分类",
+      "fieldtype": "Link",
+      "options": "Item Group"
+    }
+  ]
+}

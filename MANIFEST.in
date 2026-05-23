@@ -1,0 +1,19 @@
+# MANIFEST.in
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include starmake *.css
+recursive-include starmake *.csv
+recursive-include starmake *.html
+recursive-include starmake *.ico
+recursive-include starmake *.js
+recursive-include starmake *.json
+recursive-include starmake *.md
+recursive-include starmake *.png
+recursive-include starmake *.py
+recursive-include starmake *.svg
+recursive-include starmake *.txt
+recursive-exclude starmake *.pyc

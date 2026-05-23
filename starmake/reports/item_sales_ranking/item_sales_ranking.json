@@ -1,0 +1,28 @@
+{
+  "name": "Item Sales Ranking",
+  "doctype": "Report",
+  "ref_doctype": "Sales Order",
+  "report_type": "Script Report",
+  "module": "Selling",
+  "is_standard": "Yes",
+  "filters": [
+    {
+      "fieldname": "from_date",
+      "label": "开始日期",
+      "fieldtype": "Date",
+      "default": "frappe.datetime.month_start()"
+    },
+    {
+      "fieldname": "to_date",
+      "label": "结束日期",
+      "fieldtype": "Date",
+      "default": "frappe.datetime.now_date()"
+    },
+    {
+      "fieldname": "item_group",
+      "label": "商品分类",
+      "fieldtype": "Link",
+      "options": "Item Group"
+    }
+  ]
+}

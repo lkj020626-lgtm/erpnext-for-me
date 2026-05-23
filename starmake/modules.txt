@@ -1,0 +1,14 @@
+Master Data
+Buying
+Selling
+Stock
+Manufacturing
+Finance
+CRM
+Project
+Asset
+HR
+Reports
+Print Templates
+Excel IO
+Permissions

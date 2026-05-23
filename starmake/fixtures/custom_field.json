@@ -1,0 +1,157 @@
+[
+  {
+    "doctype": "Custom Field",
+    "dt": "Item",
+    "module": "Master Data",
+    "fieldname": "custom_specification",
+    "fieldtype": "Data",
+    "label": "规格型号",
+    "insert_after": "item_name",
+    "translatable": 0,
+    "description": "商品的规格型号，如：100ml、M6*20、220V/50Hz"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Item",
+    "module": "Master Data",
+    "fieldname": "custom_min_stock_qty",
+    "fieldtype": "Float",
+    "label": "最低库存",
+    "insert_after": "safety_stock",
+    "non_negative": 1,
+    "description": "低于此数量时触发库存预警（与safety_stock配合使用）"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Item",
+    "module": "Master Data",
+    "fieldname": "custom_supplier_ref",
+    "fieldtype": "Link",
+    "label": "默认供应商",
+    "options": "Supplier",
+    "insert_after": "custom_specification",
+    "description": "该商品的主要供应商"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Item",
+    "module": "Master Data",
+    "fieldname": "custom_purchase_price",
+    "fieldtype": "Currency",
+    "label": "参考采购价",
+    "insert_after": "standard_rate",
+    "non_negative": 1,
+    "description": "最近一次采购单价（仅供参考）"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Customer",
+    "module": "Master Data",
+    "fieldname": "custom_contact_person",
+    "fieldtype": "Data",
+    "label": "联系人",
+    "insert_after": "customer_name",
+    "description": "主要联系人姓名"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Customer",
+    "module": "Master Data",
+    "fieldname": "custom_phone",
+    "fieldtype": "Data",
+    "label": "联系电话",
+    "options": "Phone",
+    "insert_after": "custom_contact_person",
+    "description": "联系人手机号"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Customer",
+    "module": "Master Data",
+    "fieldname": "custom_address_text",
+    "fieldtype": "Small Text",
+    "label": "收货地址",
+    "insert_after": "custom_phone",
+    "description": "客户默认收货地址（简化版，不走Address doctype）"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Customer",
+    "module": "Master Data",
+    "fieldname": "custom_remark",
+    "fieldtype": "Small Text",
+    "label": "备注",
+    "insert_after": "custom_address_text"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Supplier",
+    "module": "Master Data",
+    "fieldname": "custom_contact_person",
+    "fieldtype": "Data",
+    "label": "联系人",
+    "insert_after": "supplier_name",
+    "description": "主要联系人姓名"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Supplier",
+    "module": "Master Data",
+    "fieldname": "custom_phone",
+    "fieldtype": "Data",
+    "label": "联系电话",
+    "options": "Phone",
+    "insert_after": "custom_contact_person",
+    "description": "联系人手机号"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Supplier",
+    "module": "Master Data",
+    "fieldname": "custom_address_text",
+    "fieldtype": "Small Text",
+    "label": "地址",
+    "insert_after": "custom_phone",
+    "description": "供应商地址（简化版）"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Supplier",
+    "module": "Master Data",
+    "fieldname": "custom_bank_info",
+    "fieldtype": "Small Text",
+    "label": "银行账户信息",
+    "insert_after": "custom_address_text",
+    "description": "开户行、账号（用于付款参考）"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Supplier",
+    "module": "Master Data",
+    "fieldname": "custom_remark",
+    "fieldtype": "Small Text",
+    "label": "备注",
+    "insert_after": "custom_bank_info"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Warehouse",
+    "module": "Master Data",
+    "fieldname": "custom_warehouse_location",
+    "fieldtype": "Data",
+    "label": "仓库位置",
+    "insert_after": "warehouse_name",
+    "description": "仓库物理位置描述，如：A栋1楼、厂区东侧"
+  },
+  {
+    "doctype": "Custom Field",
+    "dt": "Warehouse",
+    "module": "Master Data",
+    "fieldname": "custom_warehouse_manager",
+    "fieldtype": "Link",
+    "label": "仓管员",
+    "options": "User",
+    "insert_after": "custom_warehouse_location",
+    "description": "负责该仓库的管理员"
+  }
+]

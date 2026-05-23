@@ -6,7 +6,7 @@ StarMake Project / Asset / HR Module
 """
 
 import frappe
-from frappe import _
+
 
 
 @frappe.whitelist()

@@ -1,7 +1,5 @@
 import json
-import unittest
 
-import frappe
 from frappe.tests.utils import FrappeTestCase
 
 from starmake.master_data.import_export import (
@@ -42,7 +40,6 @@ class TestImportExport(FrappeTestCase):
             }
         ]
         errors = validate_import_data("Item", json.dumps(rows))
-        dup_errors = [e for e in errors if "已存在" in e.get("error", "")]
         non_dup_errors = [e for e in errors if "已存在" not in e.get("error", "")]
         self.assertEqual(len(non_dup_errors), 0)
 

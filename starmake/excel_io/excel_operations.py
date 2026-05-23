@@ -90,8 +90,7 @@ def export_report_to_excel(report_name, filters=None):
     if isinstance(filters, str):
         filters = json.loads(filters)
 
-    report = frappe.get_doc("Report", report_name)
-    module_path = report.module.replace(" ", "_").lower()
+    frappe.get_doc("Report", report_name)
 
     report_func = frappe.get_attr(
         f"starmake.reports.{report_name.lower().replace(' ', '_')}.{report_name.lower().replace(' ', '_')}.execute"

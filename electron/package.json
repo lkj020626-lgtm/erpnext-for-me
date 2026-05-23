@@ -15,6 +15,11 @@
     "directories": {
       "output": "dist"
     },
+    "files": [
+      "main.js",
+      "server.json",
+      "icon.png"
+    ],
     "win": {
       "target": "nsis",
       "icon": "icon.ico"
@@ -23,7 +28,11 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "installerLanguages": ["zh_CN"],
-      "language": "2052"
+      "language": "2052",
+      "perMachine": true,
+      "allowElevation": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
     },
     "linux": {
       "target": "AppImage",

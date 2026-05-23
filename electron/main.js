@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 
 const CONFIG_PATH = path.join(app.getPath("userData"), "config.json");
+const BUILTIN_CONFIG = path.join(__dirname, "server.json");
 
 let mainWindow;
 
@@ -11,6 +12,15 @@ function getServerUrl() {
     try {
       const config = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
       if (config.serverUrl) return config.serverUrl;
+    } catch (e) {}
+  }
+  if (fs.existsSync(BUILTIN_CONFIG)) {
+    try {
+      const config = JSON.parse(fs.readFileSync(BUILTIN_CONFIG, "utf8"));
+      if (config.serverUrl) {
+        saveServerUrl(config.serverUrl);
+        return config.serverUrl;
+      }
     } catch (e) {}
   }
   return null;
